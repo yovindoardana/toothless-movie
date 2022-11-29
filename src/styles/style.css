@@ -6,7 +6,7 @@
 
 body {
   font-family: sans-serif;
-  background-color: #3B3486;
+  background-color: #3B3486 !important;
 }
 
 main {
@@ -16,8 +16,10 @@ main {
 }
 
 movie-list {
-  display: block;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
   margin-top: 32px;
-  width: 100%;
   padding: 16px;
 }

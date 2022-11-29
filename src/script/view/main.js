@@ -1,30 +1,4 @@
-// import '../component/movie-list.js'
-// import '../component/search-bar.js'
-// import DataSource from '../data/dfdata-source.js'
-
-// const main = () => {
-//   const searchElement = document.querySelector('search-bar')
-//   const movieListElement = document.querySelector('movie-list')
-
-//   const onButtonSearchClicked = async () => {
-//     try {
-//       const result = await DataSource.searchMovie(searchElement.value)
-//       renderResult(result)
-//     } catch (message) {
-//       fallbackResult(message)
-//     }
-//   }
-
-//   const renderResult = (results) => {
-//     movieListElement.movies = results
-//   }
-
-//   const fallbackResult = (message) => {
-//     movieListElement.renderError(message)
-//   }
-
-//   searchElement.clickEvent = onButtonSearchClicked
-// }
+import $ from 'jquery'
 
 const main = () => {
   const apiKey = 'b43b5812e8e8f7c8ed58a47851b7601a'
@@ -42,7 +16,8 @@ const main = () => {
       const responseJson = await response.json()
 
       if (responseJson.error) {
-        showResponseMessage(responseJson.message)
+        // showResponseMessage(responseJson.message)
+        console.log(responseJson.message)
       } else {
         renderAllMovies(responseJson.results)
         // console.log(responseJson.results)
@@ -53,23 +28,29 @@ const main = () => {
   }
 
   const renderAllMovies = (movies) => {
-    const listMovieElement = document.querySelector('movie-list')
-    listMovieElement.innerHTML = ''
-    $(selector).html(htmlString)
+    $('movie-list').html('')
+    let listMovieElement = ''
 
     movies.forEach((movie) => {
-      listMovieElement.innerHTML += `
-        <div class="col-lg-4 col-md-6 col-sm-12" style="margin-top: 12px;">
-          <div class="card">
-            <div class="card-body">
-              <h5>(${movie.id}) ${movie.title}</h5>
-              <p>${movie.author}</p>
-              <button type="button" class="btn btn-danger button-delete" id="${movie.id}">Hapus</button>
-            </div>
-          </div>
+      let imgSrc = ''
+      if (movie.backdrop_path) {
+        imgSrc = `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
+      } else {
+        imgSrc = `https://image.tmdb.org/t/p/original/${movie.poster_path}`
+      }
+      listMovieElement += `
+      <div class="card col-3">
+        <img class="movie-image" style="max-height: 200px" src="${imgSrc}" alt="">
+        <div class="card-body">
+          <h5 class="card-title">${movie.title}</h5>
+          <p>${movie.author}</p>
+          <button type="button" class="btn btn-danger button-delete" id="${movie.id}">Detail</button>
         </div>
-      `
+      </div>
+    `
     })
+
+    $('movie-list').html(listMovieElement)
   }
 
   const showResponseMessage = (message = 'Check your internet connection') => {

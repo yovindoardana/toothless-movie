@@ -26,7 +26,6 @@ class SearchBar extends HTMLElement {
           padding: 16px;
           border-radius: 5px;
           display: flex;
-          position: sticky;
           top: 10px;
           background-color: #FCFDF2;
         }
