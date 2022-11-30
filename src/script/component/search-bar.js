@@ -1,23 +1,26 @@
 class SearchBar extends HTMLElement {
-  constructor() {
+  constructor () {
     super()
     this.shadowDOM = this.attachShadow({ mode: 'open' })
   }
 
-  connectedCallback() {
+  connectedCallback () {
     this.render()
   }
 
-  set clickEvent(event) {
+  get clickEvent () {
+  }
+
+  set clickEvent (event) {
     this._clickEvent = event
     this.render()
   }
 
-  get value() {
+  get value () {
     return this.shadowDOM.querySelector('#searchElement').value
   }
 
-  render() {
+  render () {
     this.shadowDOM.innerHTML = `
       <style>
         .search-container {
