@@ -95,7 +95,7 @@ const main = () => {
 
   $('search-bar').on('click', searchedMovies)
 
-  $(function () {
+  $(() => {
     getAllMovies()
   })
 }
