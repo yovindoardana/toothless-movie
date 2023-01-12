@@ -41,7 +41,8 @@ const main = () => {
         console.log(responseJson.message)
       } else {
         const movies = []
-        const keyword = $('search-bar').val()
+        const keyword = $('search-bar').val().toLowerCase()
+        console.log(keyword)
         responseJson.results.forEach((movie) => {
           if (movie.title.toLowerCase().includes(keyword)) {
             movies.push(movie)
@@ -56,6 +57,7 @@ const main = () => {
 
   const renderAllMovies = (movies) => {
     $('movie-list').html('')
+    $('movie-list').addClass('')
     let listMovieElement = ''
 
     if (movies.length !== 0) {
@@ -67,11 +69,11 @@ const main = () => {
           imgSrc = `https://image.tmdb.org/t/p/original/${movie.poster_path}`
         }
         listMovieElement += `
-      <div class="card col-3">
-        <img class="movie-image" style="max-height: 200px" src="${imgSrc}" alt="">
-        <div class="card-body">
-          <h5 class="card-title">${movie.title}</h5>
-          <p>${movie.release_date}</p>
+      <div class="card col-2">
+        <img style="max-height: 200px" src="${imgSrc}" alt="">
+        <div class="card-body d-flex flex-column justify-content-between">
+          <h5 class="card-title text-truncate">${movie.title}</h5>
+          <p class='mb-0 fst-italic'>Release Date: ${movie.release_date}</p>
         </div>
       </div>
     `

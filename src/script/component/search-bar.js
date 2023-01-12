@@ -31,6 +31,7 @@ class SearchBar extends HTMLElement {
           display: flex;
           top: 10px;
           background-color: #FCFDF2;
+          margin: 0px auto;
         }
         .search-container > input {
           width: 75%;
